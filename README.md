@@ -9,8 +9,8 @@ Your integration points are in `app/integration/`:
 See `app/api/routes/recovery.py` for how they're called.
 
 ### Andrew (Frontend):
-**Live API:** https://equilibria-backend.onrender.com
-**Documentation:** https://equilibria-backend.onrender.com/docs
+**Live API:** https://equilibria-backend-g5oa.onrender.com
+**Documentation:** https://equilibria-backend-g5oa.onrender.com/docs
 
 Key endpoints:
 - POST `/api/v1/auth/register` - Register user
