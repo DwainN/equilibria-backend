@@ -1,6 +1,6 @@
 ##For Team Members
 
-@Fenthon (Recovery Engine):
+Fenthon (Recovery Engine):
 Your integration points are ready in app/integration/:
 - recovery_engine.py - Recovery score calculation (currently has placeholder)
 - recommendation_rules.py - Workout intensity rules (currently has placeholder)
@@ -12,7 +12,7 @@ To integrate:
 3. See app/api/routes/recovery.py for how they're called
 4. Push to a new branch and I'll merge it
 
-@Andrew (Mobile Frontend):
+Andrew (Mobile Frontend):
 API Base URL: https://YOUR-URL.onrender.com
 Full API Documentation: https://YOUR-URL.onrender.com/docs
 
@@ -29,7 +29,7 @@ Key Endpoints:
 Authentication: Include JWT token in headers:
 Authorization: Bearer <token>
 
-@Ian (Deployment):
+Ian (Deployment):
 Already deployed to Render! 
 - Backend: Live and running
 - Database: PostgreSQL on Render
@@ -38,7 +38,7 @@ Already deployed to Render!
 
 If you need to redeploy elsewhere, everything is containerized and ready.
 
-@Kadeem (Testing):
+Kadeem (Testing):
 Interactive API Testing: https://YOUR-URL.onrender.com/docs
 - Click any endpoint → "Try it out" → Test directly in browser
 - Postman collection in repo: equilibria_api.json
