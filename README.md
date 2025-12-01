@@ -39,7 +39,7 @@ Already deployed to Render!
 If you need to redeploy elsewhere, everything is containerized and ready.
 
 Kadeem (Testing):
-Interactive API Testing: https://YOUR-URL.onrender.com/docs
+Interactive API Testing: https://equilibria-backend-g5oa.onrender.com/docs
 - Click any endpoint → "Try it out" → Test directly in browser
 - Postman collection in repo: equilibria_api.json
 - All endpoints have validation and detailed error messages
