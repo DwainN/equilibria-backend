@@ -13,8 +13,8 @@ To integrate:
 4. Push to a new branch and I'll merge it
 
 Andrew (Mobile Frontend):
-API Base URL: https://YOUR-URL.onrender.com
-Full API Documentation: https://YOUR-URL.onrender.com/docs
+API Base URL: https://equilibria-backend-g5oa.onrender.com/
+Full API Documentation: https://equilibria-backend-g5oa.onrender.com/docs
 
 Key Endpoints:
 - POST /api/v1/auth/register - Register new user
