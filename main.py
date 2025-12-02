@@ -22,6 +22,17 @@ async def lifespan(app: FastAPI):
     """Startup and shutdown events"""
     # Startup
     logger.info("Starting Equilibria API", version="1.0.0")
+    
+    # Run migrations on startup
+    try:
+        from alembic.config import Config
+        from alembic import command
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        logger.info("Database migrations completed")
+    except Exception as e:
+        logger.error("Migration failed", error=str(e))
+    
     yield
     # Shutdown
     logger.info("Shutting down Equilibria API")
