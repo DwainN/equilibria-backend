@@ -12,56 +12,11 @@ from app.db.models import User, RecoveryLog, WearableData
 from app.schemas.auth import RecoveryInput, RecoveryResponse
 from app.core.security import get_current_active_user
 
-# TODO: Import Fenthon's modules when ready
-# from app.integration.recovery_engine import calculate_recovery_score
-# from app.integration.recommendation_rules import get_workout_recommendation
+# Use Fenthon's integration modules
+from app.integration import recovery_engine, recommendation_rules
 
 router = APIRouter()
 logger = structlog.get_logger()
-
-
-def calculate_recovery_score_placeholder(recovery_data: dict, wearable_data: dict = None) -> float:
-    """
-    PLACEHOLDER: This will be replaced with Fenthon's recovery_engine.py
-    
-    To integrate Fenthon's code:
-    1. Make sure his recovery_engine.py is in app/integration/
-    2. Import: from app.integration.recovery_engine import calculate_recovery_score
-    3. Replace this function with his implementation
-    """
-    sleep = recovery_data.get("sleep_quality", 5)
-    soreness = recovery_data.get("soreness_level", 5)
-    energy = recovery_data.get("energy_level", 5)
-    
-    # Invert soreness
-    soreness_inverted = 11 - soreness
-    
-    # Weighted average
-    score = (0.4 * sleep) + (0.3 * soreness_inverted) + (0.3 * energy)
-    
-    # Add HRV if available
-    if wearable_data and wearable_data.get("hrv_rmssd"):
-        hrv_contribution = min(wearable_data["hrv_rmssd"] / 50, 2)
-        score += hrv_contribution
-    
-    return round(min(max(score, 1), 10), 1)
-
-
-def get_workout_recommendation_placeholder(recovery_score: float) -> str:
-    """
-    PLACEHOLDER: This will be replaced with Fenthon's recommendation_rules.py
-    
-    To integrate Fenthon's code:
-    1. Make sure his recommendation_rules.py is in app/integration/
-    2. Import: from app.integration.recommendation_rules import get_workout_recommendation
-    3. Replace this function with his implementation
-    """
-    if recovery_score >= 8:
-        return "Heavy"
-    elif recovery_score >= 5:
-        return "Moderate"
-    else:
-        return "Light/Rest"
 
 
 @router.post("/log", response_model=RecoveryResponse, status_code=status.HTTP_201_CREATED)
@@ -86,14 +41,15 @@ def log_recovery_data(
             "sleep_duration_minutes": wearable.sleep_duration_minutes
         }
     
-    # Calculate recovery score
-    recovery_score = calculate_recovery_score_placeholder(
+    # Calculate recovery score (Fenthon's engine)
+    recovery_score = recovery_engine.calculate_recovery_score(
         recovery_data.model_dump(),
         wearable_dict
     )
-    
-    # Get workout recommendation
-    recommendation = get_workout_recommendation_placeholder(recovery_score)
+
+    # Get workout recommendation (Fenthon's rules)
+    recommendation = recommendation_rules.get_workout_recommendation(recovery_score)
+
     
     # Create recovery log entry
     new_log = RecoveryLog(
